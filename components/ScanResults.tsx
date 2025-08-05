@@ -240,7 +240,7 @@ export function ScanResults({ logs, onNavigate, onViewLog, onDeleteLog }: ScanRe
                       {log.category}
                     </Badge>
                   </td>
-                  <td className="p-3 text-sm text-text max-w-xs truncate">{log.description}</td>
+                  <td className="p-3 text-sm text-text text-left whitespace-normal break-words">{log.description}</td>
                   <td className="p-3 text-sm text-text-sub truncate max-w-32">{log.createdBy}</td>
                   <td className="p-3">
                     <Button
