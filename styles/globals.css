@@ -1,0 +1,195 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Design tokens from specification */
+  --font-family: 'Inter', sans-serif;
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 24px;
+  --font-size-2xl: 32px;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --spacing: 4px;
+  
+  /* Colors from specification */
+  --bg: #FFFFFF;
+  --surface: #F9FAFB;
+  --border: #E5E7EB;
+  --primary: #2563EB;
+  --primary-fg: #FFFFFF;
+  --text: #0F172A;
+  --text-sub: #475569;
+  --shadow: 0 1px 2px rgba(0,0,0,0.06);
+  
+  /* Additional colors for functionality */
+  --red-600: #DC2626;
+  --primary-10: rgba(37, 99, 235, 0.1);
+  --primary-5: rgba(37, 99, 235, 0.05);
+  
+  /* Legacy CSS variables for compatibility */
+  --background: var(--bg);
+  --foreground: var(--text);
+  --card: var(--bg);
+  --card-foreground: var(--text);
+  --popover: var(--bg);
+  --popover-foreground: var(--text);
+  --secondary: var(--surface);
+  --secondary-foreground: var(--text);
+  --muted: var(--surface);
+  --muted-foreground: var(--text-sub);
+  --accent: var(--surface);
+  --accent-foreground: var(--text);
+  --destructive: var(--red-600);
+  --destructive-foreground: var(--primary-fg);
+  --input: transparent;
+  --input-background: var(--surface);
+  --switch-background: #cbced4;
+  --ring: var(--primary);
+  --radius: var(--radius-md);
+  --sidebar: var(--surface);
+  --sidebar-foreground: var(--text);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-fg);
+  --sidebar-accent: var(--bg);
+  --sidebar-accent-foreground: var(--text);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--primary);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-fg);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: calc(var(--radius-lg) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+  }
+}
+
+/**
+ * Base typography using design tokens
+ */
+@layer base {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+    h1 {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h2 {
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h3 {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h4 {
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    p {
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-regular);
+      line-height: 1.5;
+    }
+
+    label {
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    button {
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    input, textarea, select {
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-regular);
+      line-height: 1.5;
+    }
+  }
+}
+
+/* Custom utility classes for design tokens */
+@layer utilities {
+  .text-xs { font-size: var(--font-size-xs); }
+  .text-sm { font-size: var(--font-size-sm); }
+  .text-base { font-size: var(--font-size-base); }
+  .text-lg { font-size: var(--font-size-lg); }
+  .text-xl { font-size: var(--font-size-xl); }
+  .text-2xl { font-size: var(--font-size-2xl); }
+  
+  .font-regular { font-weight: var(--font-weight-regular); }
+  .font-medium { font-weight: var(--font-weight-medium); }
+  .font-semibold { font-weight: var(--font-weight-semibold); }
+  
+  .bg-bg { background-color: var(--bg); }
+  .bg-surface { background-color: var(--surface); }
+  .border-border-color { border-color: var(--border); }
+  .bg-primary { background-color: var(--primary); }
+  .text-primary { color: var(--primary); }
+  .text-primary-fg { color: var(--primary-fg); }
+  .text-text { color: var(--text); }
+  .text-text-sub { color: var(--text-sub); }
+  
+  .shadow-default { box-shadow: var(--shadow); }
+}
+
+html {
+  font-size: 14px; /* Base font size from design tokens */
+}
