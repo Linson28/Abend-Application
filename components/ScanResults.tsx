@@ -12,9 +12,10 @@ interface ScanResultsProps {
   onNavigate: (view: View) => void;
   onViewLog: (log: LogEntry) => void;
   onDeleteLog: (logId: string) => void;
+  onLoadLogs: () => void;
 }
 
-export function ScanResults({ logs, onNavigate, onViewLog, onDeleteLog }: ScanResultsProps) {
+export function ScanResults({ logs, onNavigate, onViewLog, onDeleteLog, onLoadLogs }: ScanResultsProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [columnFilters, setColumnFilters] = useState({
     subsystem: '',
@@ -89,23 +90,24 @@ export function ScanResults({ logs, onNavigate, onViewLog, onDeleteLog }: ScanRe
     <Layout currentView="scan" onNavigate={onNavigate}>
       {/* Global Search */}
       <div className="bg-surface border-b border-border-color p-4">
-        <div className="flex items-center gap-4">
-          <div className="flex-1 max-w-md">
-            <div className="relative">
-              <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-text-sub" />
-              <Input
-                placeholder="Global search across all fields..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 text-sm"
-              />
-            </div>
+      <div className="flex items-center gap-4">
+        <div className="flex-1 max-w-md">
+          <div className="relative">
+            <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-text-sub" />
+            <Input
+              placeholder="Global search across all fields..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10 text-sm"
+            />
           </div>
-          <Badge variant="secondary" className="text-sm">
-            {filteredLogs.length} results
-          </Badge>
         </div>
+        <Button onClick={onLoadLogs} className="text-sm">Load From Server</Button>
+        <Badge variant="secondary" className="text-sm">
+          {filteredLogs.length} results
+        </Badge>
       </div>
+    </div>
 
       {/* Results Table with Column Filters */}
       <div className="flex-1 overflow-auto">
