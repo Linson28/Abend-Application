@@ -120,6 +120,20 @@ export default function App() {
     setCurrentView('add-log');
   };
 
+  const handleLoadLogs = async () => {
+    try {
+      const response = await fetch('/api/logs');
+      const data = await response.json();
+      const mapped: LogEntry[] = data.map((log: any) => ({
+        ...log,
+        timestamp: new Date(log.timestamp)
+      }));
+      setLogs(mapped);
+    } catch (error) {
+      console.error('Failed to load logs', error);
+    }
+  };
+
   const handleViewLog = (log: LogEntry) => {
     setSelectedLog(log);
     setEditMode(false);
@@ -147,11 +161,12 @@ export default function App() {
           copyData={copyMode && selectedLog ? selectedLog : undefined}
         />;
       case 'scan':
-        return <ScanResults 
-          logs={logs} 
-          onNavigate={setCurrentView} 
+        return <ScanResults
+          logs={logs}
+          onNavigate={setCurrentView}
           onViewLog={handleViewLog}
           onDeleteLog={handleDeleteLog}
+          onLoadLogs={handleLoadLogs}
         />;
       default:
         return <Landing onNavigate={setCurrentView} />;
